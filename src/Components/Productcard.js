@@ -1,18 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProductListData } from "../Utils/Productlist";
 import Product from "./Product";
+import Skeleton from "./Skeleton";
 //named export
 export const Productcard = () => {
   //Local state variable
   // const[dataList,setData]=useState(ProductListData)
   // const arry=useState(ProductListData)
   // const [dataList,setData]=arry
-  const arry=useState(ProductListData)
+  const arry=useState([])
   const dataList=arry[0]
   const setData=arry[1]
-  
-  return (
+
+  const [searchData,setSearchData]=useState("")
+
+  const [filterSearch,setFilterSearch]=useState([])
+
+  // console.log("useEffect called");
+  useEffect(()=>{
+    dataFetch();
+  },[])
+  const dataFetch=async()=>{
+    const fetchData=await fetch("https://fakestoreapi.com/products/");
+    const dt=await fetchData.json()
+    setData(dt)
+    setFilterSearch(dt)
+
+  }
+  //Conditi0nal rendering
+  // if(dataList.length===0){
+  //   return <Skeleton/>
+  // }
+  return dataList.length===0?<Skeleton/>:
     <div>
+      <div style={{"marginTop":"30px"}}   >
+        <input type="text" placeholder="Search" value={searchData} onChange={(e)=>{
+          setSearchData(e.target.value)
+
+        }}/>
+        <button onClick={()=>{
+          const findData=dataList.filter(product=>product.title.toLowerCase().includes(searchData.toLowerCase()))
+          setFilterSearch(findData)
+
+        }}>Search</button>
+      </div>
       <button onClick={()=>{
         const filteredData=dataList.filter(product => product.rating.rate >= 4);
         setData(filteredData)
@@ -20,7 +51,7 @@ export const Productcard = () => {
       } style={{"marginTop":"30px"}}>Top Rated Products</button>
     <div className="productcard">
       {
-        dataList.map((product, index) => {
+        filterSearch.map((product, index) => {
           return (
             <Product key={product.id} data={product} />
           );
@@ -41,6 +72,5 @@ export const Productcard = () => {
       <Product title="Jacket" price="$50" rating="4.9" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREZodCYpCCPz_Q4BDiFpxZJAhU1piEp998Hw&s"/> */}
     </div>
     </div>
-  );
 };
 
