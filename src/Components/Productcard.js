@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import { ProductListData } from "../Utils/Productlist";
 import Product from "./Product";
 import Skeleton from "./Skeleton";
+import { Link } from "react-router-dom";
 //named export
 export const Productcard = () => {
   //Local state variable
-  // const[dataList,setData]=useState(ProductListData)
+  const[dataList,setData]=useState(ProductListData)
   // const arry=useState(ProductListData)
   // const [dataList,setData]=arry
-  const arry=useState([])
-  const dataList=arry[0]
-  const setData=arry[1]
+  // const arry=useState([])
+  // const dataList=arry[0]
+  // const setData=arry[1]
 
   const [searchData,setSearchData]=useState("")
 
@@ -22,8 +23,8 @@ export const Productcard = () => {
   },[])
   const dataFetch=async()=>{
     const fetchData=await fetch("https://fakestoreapi.com/products/");
-    const dt=await fetchData.json()
-    setData(dt)
+    const dt=await fetchData.json();
+    setData(dt);
     setFilterSearch(dt)
 
   }
@@ -53,7 +54,7 @@ export const Productcard = () => {
       {
         filterSearch.map((product, index) => {
           return (
-            <Product key={product.id} data={product} />
+            <Link key={product.id} to={`/product/${product.id}`}><Product data={product} /></Link>
           );
         })
       }

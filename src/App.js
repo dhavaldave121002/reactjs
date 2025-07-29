@@ -1,25 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import Navbar from "./Components/Navbar";
-import {Productcard} from "./Components/Productcard";
-
-
+import { Productcard } from "./Components/Productcard";
+import Men from "./Components/Men";
+import Women from "./Components/Women";
+import Kid from "./Components/Kid";
+import Error from "./Components/Error";
+import ProductDetail from "./Components/ProductDetails";
+import {createBrowserRouter,RouterProvider,Outlet} from "react-router-dom"; 
+import About from "./Components/About";
 
 // Product list data
 
-
-// // Function definitions
+// Function definitions
 // const fn = () => true; // You can control rendering logic here
 // const fun2 = () => true;
 
-// // Component definitions
+// Component definitions
 // const Heading1 = () => <h1 id="heading1">Hello world from Heading1</h1>;
 // const Heading2 = () => <h1 id="heading2">Hello world from Heading2</h1>;
 
-// // Dynamic value
+// Dynamic value
 // const num = 3;
 
-// // Main component using JSX
+// Main component using JSX
 // const MainContainer = () => {
 //   return (
 //     <div id="maincontainer2">
@@ -46,11 +50,45 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      <Productcard />
+      <Outlet/>
     </div>
   );
 };
 
-// Render to DOM
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+const appRouter = createBrowserRouter([ // Fixed import name here
+  {
+    path: "/",
+    element: <App/>,
+    children:[
+      {
+        path: "/",
+        element: <Productcard/>
+      },
+      {
+        path: "/kid",
+        element: <Kid/>
+      },
+      {
+        path: "/men",
+        element: <Men/>
+      },
+      {
+        path: "/women",
+        element: <Women/>
+      },
+      {
+        path: "/about",
+        element: <About/>
+      },
+      {
+        path: "/product/:id",
+        element: <ProductDetail/>
+      }
+    ],
+    errorElement: <Error/>
+  }
+]);
+
+// Ensure your root element exists in HTML and uses React 18 syntax for createRoot
+const root = ReactDOM.createRoot(document.getElementById("root")); // Ensure this is correct
+root.render(<RouterProvider router={appRouter}/>);
