@@ -6,8 +6,13 @@ class ProfileClass extends React.Component{
     this.state={
       count:0
     }
+    console.log("Hy ,i am constructor")
+  }
+  componentDidMount(){
+    console.log("Hy ,i am componentDidMount")
   }
   render(){
+    console.log("Hy ,i am render")
     return(
       <div style={{"color":"Green","border":"1px solid black","padding":"10px","margin":"10px"}}>
         <h1>Class Profile</h1>
