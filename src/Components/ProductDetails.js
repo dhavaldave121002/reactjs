@@ -1,21 +1,24 @@
 import { useEffect, useState } from "react";
 import Skeleton from "./Skeleton";
 import { useParams } from "react-router-dom";
+import usegetSingleproduct from "../hooks/usegetSingleproduct";
 
 
 
 const ProductDetail=()=>{
- const [singleData,setSingleData]= useState(null)
- const {id}=useParams();
+  const {id}=useParams();
+  const singleData= usegetSingleproduct(id);
+//  const [singleData,setSingleData]= useState(null)
+//  const {id}=useParams();
   // console.log(id);
-  useEffect(()=>{
-    fetchData();
-  },[])
-  const fetchData=async()=>{
-    const data=await fetch(`https://fakestoreapi.com/products/${id}`);
-    const dt=await data.json();
-    setSingleData(dt);
-  }
+  // useEffect(()=>{
+  //   fetchData();
+  // },[])
+  // const fetchData=async()=>{
+  //   const data=await fetch(`https://fakestoreapi.com/products/${id}`);
+  //   const dt=await data.json();
+  //   setSingleData(dt);
+  // }
   if(singleData===null){
     return <Skeleton/>
   }
