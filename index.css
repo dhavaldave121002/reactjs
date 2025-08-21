@@ -1,4 +1,6 @@
-.navbar{
+@import "tailwindcss";
+
+/* .navbar{
   display: flex;
   justify-content: space-between;;
   border-bottom: 1px solid black;
@@ -35,4 +37,4 @@
   height: 300px;
   margin: 10px;
   background-color: #f0f0f0f0;
-}
+} */

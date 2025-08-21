@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ProductListData } from "../Utils/Productlist";
-import Product from "./Product";
+import Product, { HOF } from "./Product";
 import Skeleton from "./Skeleton";
 import { Link } from "react-router-dom";
 //named export
@@ -16,6 +16,8 @@ export const Productcard = () => {
   const [searchData,setSearchData]=useState("")
 
   const [filterSearch,setFilterSearch]=useState([])
+
+  const HOFComponent=HOF(Product);
 
   // console.log("useEffect called");
   useEffect(()=>{
@@ -34,27 +36,27 @@ export const Productcard = () => {
   // }
   return dataList.length===0?<Skeleton/>:
     <div>
-      <div style={{"marginTop":"30px"}}   >
-        <input type="text" placeholder="Search" value={searchData} onChange={(e)=>{
+      <div className="mt-10 ml-3"   >
+        <input type="text" placeholder="Search" value={searchData}  className="border border-gray-700 px-2 py-1"onChange={(e)=>{
           setSearchData(e.target.value)
 
         }}/>
-        <button onClick={()=>{
+        <button className="bg-amber-300 px-6 py-1 rounded-sm text-white" onClick={()=>{
           const findData=dataList.filter(product=>product.title.toLowerCase().includes(searchData.toLowerCase()))
           setFilterSearch(findData)
 
         }}>Search</button>
       </div>
-      <button onClick={()=>{
+      <button  className="bg-amber-300 px-6 py-1 rounded-sm text-white ml-3 mt-3" onClick={()=>{
         const filteredData=dataList.filter(product => product.rating.rate >= 4);
         setData(filteredData)
       }
-      } style={{"marginTop":"30px"}}>Top Rated Products</button>
-    <div className="productcard">
+      }>Top Rated Products</button>
+    <div className=" max-w-7xl mx-auto mt-10 grid grid-cols-5 gap-3">
       {
         filterSearch.map((product, index) => {
           return (
-            <Link key={product.id} to={`/product/${product.id}`}><Product data={product} /></Link>
+            <Link key={product.id} to={`/product/${product.id}`}>{product.rating.rate >=4 ?<HOFComponent product={product}/>:<Product product={product}/>}</Link>
           );
         })
       }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, lazy ,Suspense} from "react";
 import ReactDOM from "react-dom/client";
 import Navbar from "./Components/Navbar";
 import { Productcard } from "./Components/Productcard";
@@ -9,7 +9,11 @@ import Error from "./Components/Error";
 import ProductDetail from "./Components/ProductDetails";
 import {createBrowserRouter,RouterProvider,Outlet} from "react-router-dom"; 
 import About from "./Components/About";
+import Skeleton from "./Components/Skeleton";
+// import Grocery from "./Components/grocery";
 
+
+const Grocery = lazy(() => import("./Components/grocery"));
 // Product list data
 
 // Function definitions
@@ -55,6 +59,7 @@ const App = () => {
   );
 };
 
+
 const appRouter = createBrowserRouter([ // Fixed import name here
   {
     path: "/",
@@ -79,6 +84,10 @@ const appRouter = createBrowserRouter([ // Fixed import name here
       {
         path: "/about",
         element: <About/>
+      },
+      {
+        path: "/grocery",
+        element: <Suspense fallback={<Skeleton/>}><Grocery/></Suspense>
       },
       {
         path: "/product/:id",

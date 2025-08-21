@@ -24,19 +24,21 @@ const ProductDetail=()=>{
   }
   const {image,title,price,rating}=singleData;
   return(
-    <div className="product">
-      <img
+    <div className="max-w-5xl mx-auto mt-10">
+    <div className="border border-gray-600 p-5 rounded-md">
+      <img className="w-32 "
         src={image}
         alt="img"
       />
       {/* <h1>{props.title}</h1>
       <p>Price: {props.price}</p>
       <p>Rating: {props.rating}</p> */}
-      <h1>{title}</h1>
-      <p>Price: {price}</p>
-      <p>Rating: {rating.rate}</p>
+      <h1 className="text-2xl font-bold">{title}</h1>
+      <p className="font-bold text-gray-700">Price: {price}</p>
+      <p className="font-bold text-gray-700">Rating: {rating.rate}</p>
       <p>Rating Count: {rating.count}</p>
       <p>Description: {singleData.description}</p>
+    </div>
     </div>
   )
 }
