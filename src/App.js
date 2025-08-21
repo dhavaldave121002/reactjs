@@ -1,4 +1,4 @@
-import React, { useEffect, lazy ,Suspense} from "react";
+import React, { useEffect, lazy ,Suspense, useState} from "react";
 import ReactDOM from "react-dom/client";
 import Navbar from "./Components/Navbar";
 import { Productcard } from "./Components/Productcard";
@@ -10,6 +10,7 @@ import ProductDetail from "./Components/ProductDetails";
 import {createBrowserRouter,RouterProvider,Outlet} from "react-router-dom"; 
 import About from "./Components/About";
 import Skeleton from "./Components/Skeleton";
+import CompoA from "./Components/CompoA";
 // import Grocery from "./Components/grocery";
 
 
@@ -51,9 +52,11 @@ const Grocery = lazy(() => import("./Components/grocery"));
 // };
 
 const App = () => {
+  const[userName,setuserName]=useState("");
   return (
     <div>
       <Navbar />
+      {/* <CompoA/> */}
       <Outlet/>
     </div>
   );

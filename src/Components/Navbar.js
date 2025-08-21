@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState ,useContext} from "react";
 import { Link } from "react-router-dom";
+import UserContext from "./userContext";
 
 const Navbar = () => {
   const[btnName,setBtnName]=useState("Light")
+  const user=useContext(UserContext);
   // console.log("Button clicked");
   return (
     <div className="navbar flex justify-between px-10 py-5 shadow-md">
@@ -13,6 +15,7 @@ const Navbar = () => {
         <li><Link to="/kid">Kids</Link></li>
         <li><Link to="/grocery">Grocery</Link></li>
         <li><Link to="/about">About</Link></li>
+        <li><Link to="/about">{user.name}</Link></li>
         <li>Cart</li>
         <button className="bg-amber-300 px-6 py-1 rounded-sm text-white" onClick={() => {
           

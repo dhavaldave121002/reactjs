@@ -52,6 +52,7 @@ export const Productcard = () => {
         setData(filteredData)
       }
       }>Top Rated Products</button>
+      <input className="border border-gray-500 ml-5" type="text"/>
     <div className=" max-w-7xl mx-auto mt-10 grid grid-cols-5 gap-3">
       {
         filterSearch.map((product, index) => {

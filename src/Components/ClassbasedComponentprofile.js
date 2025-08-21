@@ -1,4 +1,5 @@
 import React from "react";
+import UserContext from "./userContext";
 
 class ProfileClass extends React.Component{
   //also we can use props in constructor
@@ -21,16 +22,16 @@ class ProfileClass extends React.Component{
 
   })
  
-    console.log("Hy ,i am componentDidMount")
+    // console.log("Hy ,i am componentDidMount")
   }
   componentDidUpdate(){
-    console.log("Hy ,i am componentDidUpdate")
+    // console.log("Hy ,i am componentDidUpdate")
   }
   componentWillUnmount(){
-    console.log("Hy ,i am componentWillUnmount")
+    // console.log("Hy ,i am componentWillUnmount")
   }
   render() {
-    console.log("Hy ,i am render")
+    // console.log("Hy ,i am render")
     if (this.state.userInfo === null) {
       return <div>Loading...</div>;
     }
@@ -49,7 +50,10 @@ class ProfileClass extends React.Component{
         <h2>Mobile No.: {this.props.mobile}</h2> */}
   
         <img src={avatar_url} alt="user" />
-        <h2>Name: {name}</h2>
+        {/* <h2>Name: {name}</h2> */}
+        <UserContext.Consumer>
+          {(data)=>(<h2>{data.name}</h2>)}
+        </UserContext.Consumer>
       </div>
     );
   }
