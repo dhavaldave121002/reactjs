@@ -11,6 +11,7 @@ import {createBrowserRouter,RouterProvider,Outlet} from "react-router-dom";
 import About from "./Components/About";
 import Skeleton from "./Components/Skeleton";
 import CompoA from "./Components/CompoA";
+import UserContext from "./Components/userContext";
 // import Grocery from "./Components/grocery";
 
 
@@ -52,13 +53,18 @@ const Grocery = lazy(() => import("./Components/grocery"));
 // };
 
 const App = () => {
-  const[userName,setuserName]=useState("");
+  const[userName,setuserName]=useState("Dhaval N. Dave");
+  // useEffect(()=>{
+    
+  // })
   return (
+    <UserContext.Provider value={{name:userName,setuserName}}>
     <div>
       <Navbar />
       {/* <CompoA/> */}
       <Outlet/>
     </div>
+    </UserContext.Provider>
   );
 };
 

@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { use, useContext, useEffect, useState } from "react";
 import { ProductListData } from "../Utils/Productlist";
 import Product, { HOF } from "./Product";
 import Skeleton from "./Skeleton";
 import { Link } from "react-router-dom";
+import UserContext from "./userContext";
 //named export
 export const Productcard = () => {
   //Local state variable
@@ -18,6 +19,9 @@ export const Productcard = () => {
   const [filterSearch,setFilterSearch]=useState([])
 
   const HOFComponent=HOF(Product);
+
+  const user=useContext(UserContext);
+  // console.log(user);
 
   // console.log("useEffect called");
   useEffect(()=>{
@@ -52,7 +56,7 @@ export const Productcard = () => {
         setData(filteredData)
       }
       }>Top Rated Products</button>
-      <input className="border border-gray-500 ml-5" type="text"/>
+      <input className="border border-gray-500 ml-5" type="text" value={user.name} onChange={(e)=>user.setuserName(e.target.value)}/>
     <div className=" max-w-7xl mx-auto mt-10 grid grid-cols-5 gap-3">
       {
         filterSearch.map((product, index) => {

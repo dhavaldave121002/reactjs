@@ -14,6 +14,7 @@ const Product = ({product}) => {
       <h1>{title}</h1>
       <p>Price: {price}</p>
       <p>Rating: {rating.rate}</p>
+      <button className="bg-amber-300 px-4 py-1 rounded-sm text-white mt-1">Add to Cart</button>
     </div>
   );
 };
